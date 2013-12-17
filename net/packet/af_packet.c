@@ -1730,6 +1730,13 @@ static int tpacket_rcv(struct sk_buff *skb, struct net_device *dev,
 	struct timespec ts;
 	struct skb_shared_hwtstamps *shhwtstamps = skb_hwtstamps(skb);
 
+	/* struct tpacket{2,3}_hdr is aligned to a multiple of TPACKET_ALIGNMENT.
+	 * We may add members to them until current aligned size without forcing
+	 * userspace to call getsockopt(..., PACKET_HDRLEN, ...).
+	 */
+	BUILD_BUG_ON(TPACKET_ALIGN(sizeof(*h.h2)) != 32);
+	BUILD_BUG_ON(TPACKET_ALIGN(sizeof(*h.h3)) != 48);
+
 	if (skb->pkt_type == PACKET_LOOPBACK)
 		goto drop;
 
