@@ -1122,6 +1122,7 @@
 
        
        i2c@f9925000 { /* BLSP-1 QUP-3 */
+       qcom,clk-ctl-xfer;
        nfc547@28 {
 			compatible = "nxp,pn547";
 			reg = <0x28>;
