@@ -1100,6 +1100,7 @@ static int mdss_dsi_event_handler(struct mdss_panel_data *pdata,
 	return rc;
 }
 
+#ifndef CONFIG_MACH_SONY_EAGLE
 static struct device_node *mdss_dsi_pref_prim_panel(
 		struct platform_device *pdev)
 {
@@ -1114,6 +1115,7 @@ static struct device_node *mdss_dsi_pref_prim_panel(
 
 	return dsi_pan_node;
 }
+#endif
 
 /**
  * mdss_dsi_find_panel_of_node(): find device node of dsi panel
